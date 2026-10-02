@@ -1,0 +1,10 @@
+{
+  "offline": {"311_fixture": "data/flatfiles/nyc_311_sample.csv", "fred_fixture": "data/flatfiles/fred_dgs10_sample.csv", "sec_fixture": "data/flatfiles/sec_company_facts_sample.json", "accounts_fixture": "data/flatfiles/accounts.csv"},
+  "live": {
+    "nyc_311_url": "https://data.cityofnewyork.us/resource/erm2-nwe9.json",
+    "fred_series_url": "https://api.stlouisfed.org/fred/series/observations",
+    "fred_series_id": "DGS10",
+    "sec_companyfacts_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+    "sec_user_agent_env": "SEC_USER_AGENT"
+  }
+}

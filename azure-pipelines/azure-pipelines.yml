@@ -1,0 +1,10 @@
+trigger:
+- main
+pool: {vmImage: ubuntu-latest}
+steps:
+- task: UsePythonVersion@0
+  inputs: {versionSpec: '3.11'}
+- script: pip install -e '.[test]' && pytest -q
+  displayName: Validate migration code
+- task: PublishBuildArtifacts@1
+  inputs: {PathtoPublish: 'infra', ArtifactName: 'azure-templates'}

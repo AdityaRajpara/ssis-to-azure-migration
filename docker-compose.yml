@@ -1,0 +1,6 @@
+services:
+  migration-demo:
+    build: .
+    volumes:
+      - ./lake:/app/lake
+      - ./artifacts:/app/artifacts

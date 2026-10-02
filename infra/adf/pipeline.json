@@ -1,0 +1,13 @@
+{
+  "name": "pl_enterprise_migration_daily",
+  "properties": {
+    "parameters": {"runDate": {"type": "string", "defaultValue": "@formatDateTime(utcNow(),'yyyy-MM-dd')"}},
+    "activities": [
+      {"name": "Ingest_Public_API_and_Files", "type": "Copy", "dependsOn": [], "policy": {"timeout": "0.01:00:00", "retry": 2}, "typeProperties": {"source": {"type": "RestSource"}, "sink": {"type": "AzureBlobFSSink", "storeSettings": {"copyBehavior": "PreserveHierarchy"}}}},
+      {"name": "Load_Relational_Extract", "type": "Copy", "dependsOn": [], "typeProperties": {"source": {"type": "SqlSource"}, "sink": {"type": "AzureBlobFSSink"}}},
+      {"name": "Transform_Silver_Gold", "type": "DatabricksNotebook", "dependsOn": [{"activity": "Ingest_Public_API_and_Files", "dependencyConditions": ["Succeeded"]}, {"activity": "Load_Relational_Extract", "dependencyConditions": ["Succeeded"]}], "typeProperties": {"notebookPath": "/Shared/migration_demo/transform"}},
+      {"name": "Publish_and_Reconcile", "type": "SynapseNotebook", "dependsOn": [{"activity": "Transform_Silver_Gold", "dependencyConditions": ["Succeeded"]}], "typeProperties": {"notebookPath": "/Shared/reconciliation"}}
+    ],
+    "annotations": ["Example template: bind linked services, credentials, and runtimes before deployment"]
+  }
+}

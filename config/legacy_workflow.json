@@ -1,0 +1,8 @@
+{
+  "package_name": "PKG_Daily_Enterprise_Consolidation",
+  "schedule": "0 2 * * *",
+  "control_flow": ["Extract REST sources", "Extract relational source", "Load delimited files", "Stage raw records", "Execute SQL transformations", "Validate row counts and totals", "Publish analytics outputs"],
+  "connections": ["NYC_311_REST", "SQLite_Finance", "Delimited_Operations"],
+  "retry_count": 2,
+  "on_failure": "Stop package and write execution log"
+}

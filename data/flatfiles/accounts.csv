@@ -1,0 +1,5 @@
+account_id,domain,account_name,exposure_usd,risk_band
+1001,finance,Cash and equivalents,2500000,LOW
+1002,risk,Commercial credit portfolio,12500000,HIGH
+1003,operations,Facilities maintenance,850000,MEDIUM
+1004,finance,Accounts receivable,4200000,MEDIUM

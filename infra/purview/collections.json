@@ -1,0 +1,14 @@
+{
+  "collection": {"name": "migration-demo", "description": "Portfolio simulation assets; sources are public or labeled synthetic."},
+  "glossaryTerms": [
+    {"name": "Account Exposure", "definition": "Synthetic account-level USD exposure amount; not a real institution position."},
+    {"name": "Service Request", "definition": "Public NYC 311 request record or clearly labeled offline fixture row."},
+    {"name": "Treasury Yield", "definition": "DGS10 observation percentage value from FRED or an offline fixture."}
+  ],
+  "lineage": [
+    {"from": "source.nyc_311_api", "to": "bronze.operations.service_requests", "process": "ADF Copy activity"},
+    {"from": "source.sqlite.accounts", "to": "bronze.finance.accounts", "process": "ADF relational extract"},
+    {"from": "bronze.*", "to": "silver.standardized_records", "process": "PySpark validation and type normalization"},
+    {"from": "silver.*", "to": "gold.analytics_marts", "process": "business aggregations; Synapse/Snowflake consumption"}
+  ]
+}
